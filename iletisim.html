@@ -1,0 +1,181 @@
+<?php
+    session_start();
+
+    // Oturumda giriş yapılmamışsa, kullanıcıyı giriş sayfasına yönlendir
+    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header("Location: giris.html");
+        exit;
+    }
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İLETİŞİM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-image: url('RESİMLER/mesaj.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center top;
+            color: #fff;
+            margin: 0;
+        }
+
+        .container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .container h1,
+        .container h2 {
+            color: #ffc107;
+        }
+
+        .container p {
+            font-size: 18px;
+        }
+
+        .container ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .container ul li {
+            margin-bottom: 10px;
+        }
+
+        .container ul li a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+
+        .container ul li a:hover {
+            color: #ff8c00;
+        }
+
+        .card {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            margin-left: 20px; /* İletişim formunu sola almak için ekledik */
+            width: 400px; /* Formun genişliğini ayarladık */
+            overflow: hidden; /* Gri alanın sarı çerçeveyi aşmasını engelledik */
+        }
+
+        .card-header {
+            color: #ffc107;
+            border-bottom: none; /* Kart başlığındaki çerçeveyi kaldırdık */
+        }
+
+        .card-body {
+            background-color: #343a40;
+            padding-top: 30px; /* Formun üst kısmında biraz boşluk bıraktık */
+            padding-bottom: 30px; /* Formun alt kısmında biraz boşluk bıraktık */
+        }
+
+        .form-control {
+            background-color: #737170;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff8c00;
+            border-color: #ff8c00;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">NİSA NUR GÜREL</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="anasayfa.html">Anasayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="hakkimda.html">Hakkımda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ozgecmis.html">Özgeçmiş</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sehrim.html">Şehrim</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="takim.html">Takımım</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ilgialanlarim.html">İlgi Alanlarım</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="iletisim.html">İletişim</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="giris.html">Giriş Yap</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-start">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">İletişim Formu</div>
+
+                    <div class="card-body">
+                        <form id="contactForm" method="POST" action="send-email.php">
+                            <div class="form-group">
+                                <label for="name">Adınız</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-posta Adresiniz</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Mesajınız</label>
+                                <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gönder</button>
+                            <button type="reset" class="btn btn-secondary ml-2">Temizle</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="social-icons">
+        <a href="https://www.instagram.com/gurelnisanur?igsh=MXdkZzU2M2MxdjF2Yg==" class="social-icon"
+            target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/nisa-nur-g%C3%BCrel-b5586a27a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            class="social-icon" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/gurelnisanur?tab=repositories" class="social-icon" target="_blank"><i
+                class="fab fa-github"></i></a>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
