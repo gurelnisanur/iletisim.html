@@ -17,86 +17,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            background-image: url('RESİMLER/mesaj.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center top;
-            color: #fff;
-            margin: 0;
-        }
-
-        .container {
-            margin-top: 50px;
-            margin-bottom: 50px;
-        }
-
-        .container h1,
-        .container h2 {
-            color: #ffc107;
-        }
-
-        .container p {
-            font-size: 18px;
-        }
-
-        .container ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .container ul li {
-            margin-bottom: 10px;
-        }
-
-        .container ul li a {
-            color: #ffc107;
-            text-decoration: none;
-        }
-
-        .container ul li a:hover {
-            color: #ff8c00;
-        }
-
-        .card {
-            background-color: rgba(0, 0, 0, 0.5);
-            border: 2px solid #ffc107;
-            border-radius: 15px;
-            margin-left: 20px; /* İletişim formunu sola almak için ekledik */
-            width: 400px; /* Formun genişliğini ayarladık */
-            overflow: hidden; /* Gri alanın sarı çerçeveyi aşmasını engelledik */
-        }
-
-        .card-header {
-            color: #ffc107;
-            border-bottom: none; /* Kart başlığındaki çerçeveyi kaldırdık */
-        }
-
-        .card-body {
-            background-color: #343a40;
-            padding-top: 30px; /* Formun üst kısmında biraz boşluk bıraktık */
-            padding-bottom: 30px; /* Formun alt kısmında biraz boşluk bıraktık */
-        }
-
-        .form-control {
-            background-color: #737170;
-            color: #fff;
-        }
-
-        .btn-primary {
-            background-color: #ffc107;
-            border-color: #ffc107;
-        }
-
-        .btn-primary:hover {
-            background-color: #ff8c00;
-            border-color: #ff8c00;
-        }
-    </style>
 </head>
 
-<body>
+<body class="iletisim-sayfasi">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">NİSA NUR GÜREL</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -153,8 +76,8 @@
                                 <label for="message">Mesajınız</label>
                                 <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Gönder</button>
-                            <button type="reset" class="btn btn-secondary ml-2">Temizle</button>
+                            <button type="button" class="btn btn-primary" id="submitButton">Gönder</button>
+                            <button type="button" class="btn btn-secondary ml-2" id="resetButton">Temizle</button>
                         </form>
                     </div>
                 </div>
@@ -171,10 +94,51 @@
                 class="fab fa-github"></i></a>
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#submitButton').click(function() {
+                // Form validasyonunu burada yapacağız
+                var isValid = true;
+                var name = $('#name').val().trim();
+                var email = $('#email').val().trim();
+                var message = $('#message').val().trim();
+
+                // Ad kontrolü
+                if (name === "") {
+                    isValid = false;
+                    alert("Adınızı giriniz.");
+                }
+
+                // E-posta kontrolü
+                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                if (email === "") {
+                    isValid = false;
+                    alert("E-posta adresinizi giriniz.");
+                } else if (!emailPattern.test(email)) {
+                    isValid = false;
+                    alert("Geçerli bir e-posta adresi giriniz.");
+                }
+
+                // Mesaj kontrolü
+                if (message === "") {
+                    isValid = false;
+                    alert("Mesajınızı giriniz.");
+                }
+
+                // Form geçerliyse gönder
+                if (isValid) {
+                    $('#contactForm').submit();
+                }
+            });
+
+            $('#resetButton').click(function() {
+                $('#contactForm')[0].reset();
+            });
+        });
+    </script>
 
 </body>
 
